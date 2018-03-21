@@ -65,29 +65,9 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_js__ = __webpack_require__(1);
-// import './utils.js';
-
-
-
-console.log('app.js is running!!');
-console.log(__WEBPACK_IMPORTED_MODULE_0__utils_js__["a" /* square */](4));
-
-/***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return square; });
-console.log('utils.js is running');
-
-const square = (x) => x * x;
-
-
+throw new Error("Module parse failed: C:\\Users\\Story Tx\\Desktop\\Mead\\React Course\\indecision-app\\src\\app.js Unexpected token (4:17)\nYou may need an appropriate loader to handle this file type.\n| import ReactDOM from 'react-dom';\r\n| \r\n| const template = <p>testing</p>\r\n| ReactDOM.render(template, document.getElementById('app'));\r\n| \r");
 
 /***/ })
 /******/ ]);
