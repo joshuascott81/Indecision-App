@@ -4,6 +4,7 @@ import Option from './Option';
 import Options from './Options';
 import Header from './Header';
 import Action from './Action';
+import OptionModal from './OptionModal';
 
 export default class IndecisionApp extends React.Component {
     state =  {
@@ -39,12 +40,44 @@ export default class IndecisionApp extends React.Component {
       this.setState((prevState) => ({
           options: prevState.options.concat(option)
         }));
+<<<<<<< HEAD
     };
   
     componentDidMount = () => {
       try {
         const json = localStorage.getItem('options');
         const options = JSON.parse(json);
+=======
+      };
+  
+    componentDidMount() {
+      try {
+        const json = localStorage.getItem('options');
+        const options = JSON.parse(json);
+    
+        if(options) {
+          this.setState(() => ({ options }))
+        }
+      } catch (e) {
+  
+      }
+    }
+  
+    componentDidUpdate(prevProps, prevState) {
+      if (prevState.options.length !== this.state.options.length) {
+        const json = JSON.stringify(this.state.options);
+        localStorage.setItem('options', json);
+        console.log('saving data');
+      }
+  
+    }
+  
+    componentWillUnmount() {
+      console.log('Component will unmount')
+    }
+  
+    
+>>>>>>> fe125289d845959c077f1465ec36ad883677bf43
     
         if(options) {
           this.setState(() => ({ options }))
@@ -85,6 +118,9 @@ export default class IndecisionApp extends React.Component {
           />
           <AddOption 
             handleAddOption={this.handleAddOption}
+          />
+          <OptionModal 
+            selectedOption={this.state.selectedOption}
           />
         </div>
       );
