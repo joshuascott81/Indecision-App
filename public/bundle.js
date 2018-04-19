@@ -21812,9 +21812,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var OptionModal = function OptionModal() {
     return _react2.default.createElement(
-        'div',
-        null,
-        'some text'
+        _reactModal2.default,
+        {
+            isOpen: true,
+            contentLabel: 'Selected Option'
+        },
+        _react2.default.createElement(
+            'h3',
+            null,
+            'Selected Option'
+        )
     );
 };
 
