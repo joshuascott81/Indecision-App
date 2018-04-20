@@ -21469,51 +21469,47 @@ var IndecisionApp = function (_React$Component) {
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       options: [],
       selectedOption: undefined
-    }, _temp), _possibleConstructorReturn(_this, _ret);
-  }
-
-  _createClass(IndecisionApp, [{
-    key: 'handleDeleteOptions',
-    value: function handleDeleteOptions() {
-      this.setState(function () {
+    }, _this.handleDeleteOptions = function () {
+      _this.setState(function () {
         return { options: [] };
       });
-    }
-  }, {
-    key: 'handleDeleteOption',
-    value: function handleDeleteOption(optionToRemove) {
-      this.setState(function (prevState) {
+    }, _this.handleDeleteOption = function (optionToRemove) {
+      _this.setState(function (prevState) {
         return {
           options: prevState.options.filter(function (option) {
             return optionToRemove !== option;
           })
         };
       });
-    }
-  }, {
-    key: 'handlePick',
-    value: function handlePick() {
+    }, _this.handlePick = function () {
 
-      var randomNum = Math.floor(Math.random() * this.state.options.length);
-      var option = this.state.options[randomNum];
-      alert(option);
-    }
-  }, {
-    key: 'handleAddOption',
-    value: function handleAddOption(option) {
+      var randomNum = Math.floor(Math.random() * _this.state.options.length);
+      var option = _this.state.options[randomNum];
+      _this.setState(function () {
+        return {
+          selectedOption: option
+        };
+      });
+    }, _this.handleClearSelectedOption = function () {
+      _this.setState(function () {
+        return { selectedOption: undefined };
+      });
+    }, _this.handleAddOption = function (option) {
       if (!option) {
         return 'Enter valid value to add item';
-      } else if (this.state.options.indexOf(option) > -1) {
+      } else if (_this.state.options.indexOf(option) > -1) {
         return 'This option already exists';
       }
 
-      this.setState(function (prevState) {
+      _this.setState(function (prevState) {
         return {
           options: prevState.options.concat(option)
         };
       });
-    }
-  }, {
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  _createClass(IndecisionApp, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
       try {
@@ -21564,7 +21560,8 @@ var IndecisionApp = function (_React$Component) {
           handleAddOption: this.handleAddOption
         }),
         _react2.default.createElement(_OptionModal2.default, {
-          selectedOption: this.state.selectedOption
+          selectedOption: this.state.selectedOption,
+          handleClearSelectedOption: this.handleClearSelectedOption
         })
       );
     }
@@ -21603,35 +21600,36 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var AddOption = function (_React$Component) {
   _inherits(AddOption, _React$Component);
 
-  function AddOption(props) {
+  function AddOption() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, AddOption);
 
-    var _this = _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).call(this, props));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.handleAddOption = _this.handleAddOption.bind(_this);
-    _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = AddOption.__proto__ || Object.getPrototypeOf(AddOption)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       error: undefined
-    };
-    return _this;
-  }
-
-  _createClass(AddOption, [{
-    key: 'handleAddOption',
-    value: function handleAddOption(event) {
+    }, _this.handleAddOption = function (event) {
       event.preventDefault();
 
       var newOption = event.target.elements.newOption.value.trim();
-      var error = this.props.handleAddOption(newOption);
+      var error = _this.props.handleAddOption(newOption);
 
-      this.setState(function () {
+      _this.setState(function () {
         return { error: error };
       });
 
       if (!error) {
         event.target.elements.newOption.value = '';
       }
-    }
-  }, {
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  _createClass(AddOption, [{
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -21772,7 +21770,6 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Action = function Action(props) {
-
   return _react2.default.createElement(
     'div',
     null,
@@ -21810,17 +21807,28 @@ var _reactModal2 = _interopRequireDefault(_reactModal);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var OptionModal = function OptionModal() {
+var OptionModal = function OptionModal(props) {
     return _react2.default.createElement(
         _reactModal2.default,
         {
-            isOpen: true,
+            isOpen: !!props.selectedOption,
+            onRequestClose: props.handleClearSelectedOption,
             contentLabel: 'Selected Option'
         },
         _react2.default.createElement(
             'h3',
             null,
             'Selected Option'
+        ),
+        props.selectedOption && _react2.default.createElement(
+            'p',
+            null,
+            props.selectedOption
+        ),
+        _react2.default.createElement(
+            'button',
+            { onClick: props.handleClearSelectedOption },
+            'Okay'
         )
     );
 };
