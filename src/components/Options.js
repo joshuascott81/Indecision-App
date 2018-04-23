@@ -15,7 +15,12 @@ const Options = (props) => (
     }
     {props.options.length === 0 && <p>Please add an option to get started.</p>}
     </ol>
-    <button onClick={props.handleDeleteOptions}>Remove all</button>
+    <button
+      className="button button--link"
+      onClick={props.handleDeleteOptions}
+    >
+      Remove all
+    </button>
   </div>
 )
 
